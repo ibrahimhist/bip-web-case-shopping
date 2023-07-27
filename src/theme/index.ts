@@ -10,4 +10,9 @@ export const theme = createTheme({
       main: orange[500],
     },
   },
+  typography: {
+    button: {
+      textTransform: 'none',
+    },
+  },
 });
