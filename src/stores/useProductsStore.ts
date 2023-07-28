@@ -5,13 +5,37 @@ import { getRandomProducts } from '../utils';
 
 export interface ProductsStore {
   products: Product[] | null;
+  selectedCategories: string[];
   getProducts: (append?: boolean) => void;
+  addSelectedCategory: (category: string) => void;
+  removeSelectedCategory: (category: string) => void;
 }
 
 export const useProductsStore = create<ProductsStore>((set, get) => ({
   products: null,
+  selectedCategories: [],
+  addSelectedCategory: (category: string) => {
+    const categories = get().selectedCategories;
+
+    if (!categories.includes(category)) {
+      set({
+        selectedCategories: [...categories, category],
+      });
+    }
+  },
+  removeSelectedCategory: (category: string) => {
+    const categories = [...get().selectedCategories];
+    const categoryIndex = categories.findIndex((ctg) => ctg === category);
+
+    if (categoryIndex !== -1) {
+      categories.splice(categoryIndex, 1);
+      set({
+        selectedCategories: categories,
+      });
+    }
+  },
   getProducts: (append?: boolean) => {
-    const newProducts = getRandomProducts(12);
+    const newProducts = getRandomProducts(11);
 
     set({
       products: append

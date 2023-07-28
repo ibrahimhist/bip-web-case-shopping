@@ -12,6 +12,7 @@ import {
   ListItemAvatar,
   ListItemText,
 } from '@mui/material';
+import { shallow } from 'zustand/shallow';
 
 import { useCartStore, useProductsStore } from '../../../../stores';
 import { Product } from '../../../../models';
@@ -24,7 +25,13 @@ const currencyFormatter = new Intl.NumberFormat('en-US', {
 
 export const CartSummary = () => {
   const { products: chartProducts, removeFromCart } = useCartStore();
-  const { products } = useProductsStore();
+
+  const { products } = useProductsStore(
+    (state) => ({
+      products: state.products,
+    }),
+    shallow
+  );
 
   const items: Product[] = chartProducts.map((chartProduct) => {
     const product = products?.find((product) => product.id === chartProduct.id);
