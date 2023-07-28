@@ -1,7 +1,13 @@
 import React from 'react';
 
-import { Categories, ShoppingList, CategoryChips } from './components';
 import { Box } from '@mui/material';
+
+import {
+  Categories,
+  ShoppingList,
+  CategoryChips,
+  ShoppingSearch,
+} from './components';
 
 export const Shopping = () => {
   return (
@@ -10,6 +16,7 @@ export const Shopping = () => {
     >
       <Categories />
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <ShoppingSearch />
         <CategoryChips />
         <ShoppingList />
       </Box>

@@ -7,25 +7,46 @@ import { ShoppingCard } from '../../../../components';
 import { useProductsStore, useCartStore } from '../../../../stores';
 
 export const ShoppingList = () => {
-  const { products, selectedCategories, getProducts } = useProductsStore(
-    (state) => ({
-      products: state.products,
-      selectedCategories: state.selectedCategories,
-      getProducts: state.getProducts,
-    }),
-    shallow
-  );
+  const { products, searchText, selectedCategories, getProducts } =
+    useProductsStore(
+      (state) => ({
+        products: state.products,
+        searchText: state.searchText,
+        selectedCategories: state.selectedCategories,
+        getProducts: state.getProducts,
+      }),
+      shallow
+    );
 
   const addToCart = useCartStore((state) => state.addToCart);
 
+  const hasSelectedCategories = selectedCategories.length;
+
   const filteredProducts = useMemo(
     () =>
-      selectedCategories.length
-        ? products?.filter((product) =>
-            selectedCategories.includes(product.category)
-          )
+      hasSelectedCategories || searchText
+        ? products?.filter((product) => {
+            const isProductCategoryNotInSelecteds =
+              hasSelectedCategories &&
+              !selectedCategories.includes(product.category);
+
+            const isProductTitleIncludesNotInSearchText =
+              searchText &&
+              !product.name
+                .toLocaleLowerCase()
+                .includes(searchText.toLocaleLowerCase());
+
+            if (
+              isProductCategoryNotInSelecteds ||
+              isProductTitleIncludesNotInSearchText
+            ) {
+              return false;
+            }
+
+            return true;
+          })
         : products,
-    [selectedCategories, products]
+    [selectedCategories, products, searchText, hasSelectedCategories]
   );
 
   const handleProductAdd = (productId: string) => {
