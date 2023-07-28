@@ -5,6 +5,7 @@ import { shallow } from 'zustand/shallow';
 
 import { ShoppingCard } from '../../../../components';
 import { useProductsStore, useCartStore } from '../../../../stores';
+import { useDebouncedCallback } from 'use-debounce';
 
 export const ShoppingList = () => {
   const { products, searchText, selectedCategories, getProducts } =
@@ -53,6 +54,22 @@ export const ShoppingList = () => {
     addToCart(productId);
   };
 
+  const debouncedLoadMore = useDebouncedCallback(() => {
+    getProducts(true);
+  }, 200);
+
+  const handleListScroll = (e: any) => {
+    if (hasSelectedCategories || searchText) {
+      return;
+    }
+
+    const bottom: boolean =
+      e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 100;
+    if (bottom) {
+      debouncedLoadMore();
+    }
+  };
+
   useEffect(() => {
     getProducts();
   }, [getProducts]);
@@ -60,19 +77,30 @@ export const ShoppingList = () => {
   return (
     <Box
       sx={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, auto))',
-        gap: 2,
+        overflow: 'auto',
+        paddingBottom: 1,
       }}
+      onScroll={handleListScroll}
     >
-      {filteredProducts?.map((product) => (
-        <ShoppingCard
-          key={product.id}
-          title={product.name}
-          image={product.image}
-          onClickAdd={() => handleProductAdd(product.id)}
-        />
-      ))}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: {
+            xs: 'repeat(auto-fill, minmax(220px, auto))',
+            md: 'repeat(auto-fill, minmax(280px, auto))',
+          },
+          gap: 2,
+        }}
+      >
+        {filteredProducts?.map((product) => (
+          <ShoppingCard
+            key={product.id}
+            title={product.name}
+            image={product.image}
+            onClickAdd={() => handleProductAdd(product.id)}
+          />
+        ))}
+      </Box>
     </Box>
   );
 };

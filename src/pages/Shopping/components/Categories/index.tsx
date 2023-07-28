@@ -29,7 +29,14 @@ export const Categories = () => {
   };
 
   return (
-    <Box px={2}>
+    <Box
+      sx={{
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        px: { xs: 0, md: 2 },
+      }}
+    >
       <Typography gutterBottom variant='h6' component='div'>
         Categories
       </Typography>
@@ -39,6 +46,7 @@ export const Categories = () => {
         sx={{
           width: '100%',
           bgcolor: 'background.paper',
+          overflow: 'auto',
         }}
       >
         {categories.map((category) => (

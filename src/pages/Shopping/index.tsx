@@ -12,10 +12,23 @@ import {
 export const Shopping = () => {
   return (
     <Box
-      sx={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', gap: 2 }}
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: 'max-content 1fr',
+        gap: 2,
+        height: '100%',
+      }}
     >
       <Categories />
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          height: '100%',
+          overflow: 'hidden',
+        }}
+      >
         <ShoppingSearch />
         <CategoryChips />
         <ShoppingList />

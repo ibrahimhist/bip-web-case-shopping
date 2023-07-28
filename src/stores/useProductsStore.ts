@@ -38,7 +38,7 @@ export const useProductsStore = create<ProductsStore>((set, get) => ({
     }
   },
   getProducts: (append?: boolean) => {
-    const newProducts = getRandomProducts(11);
+    const newProducts = getRandomProducts(24);
 
     set({
       products: append

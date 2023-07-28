@@ -13,7 +13,7 @@ import { CheckoutCartButton } from '../../components';
 
 export const AppBar = () => {
   return (
-    <MuiAppBar position='static'>
+    <MuiAppBar position='sticky'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Adb sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />

@@ -9,7 +9,15 @@ export const Layout = () => {
   return (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <AppBar />
-      <Container maxWidth='xl' sx={{ flex: 1, padding: 2 }}>
+      <Container
+        maxWidth='xl'
+        sx={{
+          flex: 1,
+          padding: 2,
+          maxHeight: 'calc(100vh - 64px)',
+          overflow: 'hidden',
+        }}
+      >
         <Outlet />
       </Container>
     </Box>
