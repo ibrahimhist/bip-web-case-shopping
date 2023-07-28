@@ -1,10 +1,8 @@
 import React from 'react';
 
 import {
-  Button,
   Card,
   CardActions,
-  CardContent,
   CardMedia,
   IconButton,
   Typography,
@@ -34,7 +32,11 @@ export const ShoppingCard = ({
           py: 0.5,
         }}
       >
-        <Typography gutterBottom variant='h5' sx={{ marginBottom: 0 }}>
+        <Typography
+          gutterBottom
+          variant='h5'
+          sx={{ marginBottom: 0, fontSize: '1rem' }}
+        >
           {title}
         </Typography>
         <IconButton size='small' onClick={onClickAdd}>

@@ -7,13 +7,13 @@ import {
 } from 'react-router-dom';
 
 import { Layout } from '../layout';
-import { Checkout, ProductDetail, ShoppingList } from '../pages';
+import { Checkout, ProductDetail, Shopping } from '../pages';
 
 export const Routes = () => (
   <BrowserRouter>
     <ReactRoutes>
       <Route path='/' element={<Layout />}>
-        <Route index element={<ShoppingList />} />
+        <Route index element={<Shopping />} />
         <Route path='detail/:id' element={<ProductDetail />} />
         <Route path='checkout' element={<Checkout />} />
         <Route path='*' element={<Navigate to='/' replace />} />

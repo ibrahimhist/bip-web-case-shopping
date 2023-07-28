@@ -9,7 +9,7 @@ export const Layout = () => {
   return (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <AppBar />
-      <Box sx={{ flex: 1 }}>
+      <Box sx={{ flex: 1, padding: 2 }}>
         <Outlet />
       </Box>
     </Box>

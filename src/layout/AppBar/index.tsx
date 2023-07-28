@@ -8,7 +8,8 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { ShoppingCart } from './components';
+
+import { CheckoutCartButton } from '../../components';
 
 export const AppBar = () => {
   return (
@@ -35,7 +36,7 @@ export const AppBar = () => {
           </Typography>
 
           <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-            <ShoppingCart />
+            <CheckoutCartButton />
           </Box>
         </Toolbar>
       </Container>
