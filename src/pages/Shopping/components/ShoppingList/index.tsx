@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import { shallow } from 'zustand/shallow';
 
 import { ShoppingCard } from '../../../../components';
@@ -8,10 +8,11 @@ import { useProductsStore, useCartStore } from '../../../../stores';
 import { useDebouncedCallback } from 'use-debounce';
 
 export const ShoppingList = () => {
-  const { products, searchText, selectedCategories, getProducts } =
+  const { products, loading, searchText, selectedCategories, getProducts } =
     useProductsStore(
       (state) => ({
         products: state.products,
+        loading: state.loading,
         searchText: state.searchText,
         selectedCategories: state.selectedCategories,
         getProducts: state.getProducts,
@@ -101,6 +102,12 @@ export const ShoppingList = () => {
           />
         ))}
       </Box>
+
+      {loading && (
+        <Box sx={{ textAlign: 'center', p: 2 }}>
+          <CircularProgress color='secondary' />
+        </Box>
+      )}
     </Box>
   );
 };

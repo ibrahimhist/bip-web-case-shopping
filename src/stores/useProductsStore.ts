@@ -7,6 +7,7 @@ export interface ProductsStore {
   products: Product[] | null;
   searchText: string;
   selectedCategories: string[];
+  loading: boolean;
   getProducts: (append?: boolean) => void;
   addSelectedCategory: (category: string) => void;
   removeSelectedCategory: (category: string) => void;
@@ -15,6 +16,7 @@ export interface ProductsStore {
 
 export const useProductsStore = create<ProductsStore>((set, get) => ({
   products: null,
+  loading: false,
   selectedCategories: [],
   searchText: '',
   addSelectedCategory: (category: string) => {
@@ -38,13 +40,18 @@ export const useProductsStore = create<ProductsStore>((set, get) => ({
     }
   },
   getProducts: (append?: boolean) => {
-    const newProducts = getRandomProducts(24);
+    set({ loading: true });
 
-    set({
-      products: append
-        ? [...(get().products || []), ...newProducts]
-        : newProducts,
-    });
+    setTimeout(() => {
+      const newProducts = getRandomProducts(24);
+
+      set({
+        products: append
+          ? [...(get().products || []), ...newProducts]
+          : newProducts,
+        loading: false,
+      });
+    }, 400);
   },
   setSearchText: (newSearchText: string) => {
     set({

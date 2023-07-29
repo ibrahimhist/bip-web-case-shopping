@@ -16,7 +16,7 @@ export const AppBar = () => {
     <MuiAppBar position='sticky'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-          <Adb sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Adb sx={{ display: 'flex', mr: 1 }} />
           <Typography
             variant='h6'
             noWrap
@@ -24,7 +24,7 @@ export const AppBar = () => {
             href='/'
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
+              display: 'flex',
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
